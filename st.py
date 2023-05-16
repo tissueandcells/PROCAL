@@ -1,11 +1,12 @@
 import streamlit as st
 import pickle
+import joblib
 
 st.set_page_config(page_title="PROCAL")
 
 def get_predicted(covid_params):
     with open("model_n.sav" , 'rb') as f:
-        model_n = pickle.load(f)
+        model_n = joblib.load(f)
     return model_n.predict(covid_params)
 
 
@@ -29,22 +30,12 @@ with form:
     submitted = st.form_submit_button("Predict")
 
 if submitted:
-    result = st.success(get_predicted([[float(txt_ldh), float(txt_crp), float(txt_lymphocyte),
-                              float(txt_alt), float(txt_so2), float(txt_mcv)]]))
+    result = get_predicted([[float(txt_ldh), float(txt_crp), float(txt_lymphocyte),
+                              float(txt_alt), float(txt_so2), float(txt_mcv)]])
 
-
+    # st.success(result)
 
     if result[0] == 1:
-        st.write("PCT value is above the normal value.") 
+        st.success("PCT value is above the normal value.") 
     else:
-        st.write("PCT value is below the normal value.")
-    
-
-
-
-
-
-
-
-
-
+        st.success("PCT value is below the normal value.")
