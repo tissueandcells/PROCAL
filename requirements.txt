@@ -1,2 +1,1 @@
-RandomForestClassifier
-sckit-learn
+scikit-learn
