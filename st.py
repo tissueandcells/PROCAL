@@ -6,7 +6,7 @@ st.set_page_config(page_title="PROCAL")
 def get_predicted(covid_params):
     with open("model_n.sav" , 'rb') as f:
         model_n = pickle.load(f)
-    return model_n.predict(covid_params, validate_features=False)
+    return model_n.predict(covid_params)
 
 
 st.title("Procalcitonin Value Prediction")
